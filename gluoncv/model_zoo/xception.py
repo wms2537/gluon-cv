@@ -350,10 +350,10 @@ def get_xcetption(pretrained=False, ctx=cpu(),
         Location for keeping the model parameters.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     net = Xception65(**kwargs)
     if pretrained:
@@ -382,10 +382,10 @@ def get_xcetption_71(pretrained=False, ctx=cpu(),
         Location for keeping the model parameters.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     net = Xception71(**kwargs)
     if pretrained:

@@ -5,7 +5,7 @@ import warnings
 
 import mxnet as mx
 from mxnet.gluon import nn
-from mxnet.gluon.contrib.nn import SyncBatchNorm
+from mxnet.gluon.nn import SyncBatchNorm
 
 from ..faster_rcnn import get_faster_rcnn
 from ....nn.feature import FPNFeatureExpander

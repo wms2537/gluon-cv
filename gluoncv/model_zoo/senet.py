@@ -48,10 +48,10 @@ class SEBlock(HybridBlock):
         Whether to use average pooling for projection skip connection between stages/downsample.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
 
     def __init__(self, channels, cardinality, bottleneck_width, stride,
@@ -131,10 +131,10 @@ class SENet(HybridBlock):
         Number of classification classes.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
 
     def __init__(self, layers, cardinality, bottleneck_width, avg_down=False,
@@ -221,10 +221,10 @@ def get_senet(num_layers, cardinality=64, bottleneck_width=4, avg_down=False,
         Location for keeping the model parameters.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     assert num_layers in resnext_spec, \
         "Invalid number of layers: %d. Options are %s" % (
@@ -263,10 +263,10 @@ def senet_154(**kwargs):
         Location for keeping the model parameters.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     return get_senet(152, **kwargs)
 
@@ -291,9 +291,9 @@ def senet_154e(**kwargs):
         Location for keeping the model parameters.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     return get_senet(152, avg_down=True, **kwargs)

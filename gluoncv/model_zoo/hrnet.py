@@ -63,10 +63,10 @@ class OrigHRBottleneck(nn.HybridBlock):
         Whether to use Squeeze-and-Excitation module
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     expansion = 4
     def __init__(self, channels, stride, downsample=False, in_channels=0,
@@ -191,7 +191,7 @@ class HighResolutionModule(nn.HybridBlock):
                     )
                     fuse_layer.add(seq)
                 elif j == i:
-                    fuse_layer.add(contrib.nn.Identity())
+                    fuse_layer.add(nn.Identity())
                 else:
                     conv3x3s = nn.HybridSequential()
                     for k in range(i-j):
@@ -340,7 +340,7 @@ class HighResolutionBaseNet(nn.HybridBlock):
                     )
                     transition_layers.add(transition_layer)
                 else:
-                    transition_layers.add(contrib.nn.Identity())
+                    transition_layers.add(nn.Identity())
             else:
                 conv3x3s = nn.HybridSequential()
                 for j in range(i+1-num_branches_pre):
@@ -657,10 +657,10 @@ def get_hrnet(model_name, stage_interp_type='nearest', purpose='cls', pretrained
         Location for keeping the model parameters.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     if model_name not in HRNET_SPEC.keys():
         raise NotImplementedError

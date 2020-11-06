@@ -201,10 +201,10 @@ class YOLODetectionBlockV3(gluon.HybridBlock):
         Number of channels for 1x1 conv. 3x3 Conv will have 2*channel.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     def __init__(self, channel, norm_layer=BatchNorm, norm_kwargs=None, **kwargs):
         super(YOLODetectionBlockV3, self).__init__(**kwargs)
@@ -268,10 +268,10 @@ class YOLOV3(gluon.HybridBlock):
         penalized of objectness score.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     def __init__(self, stages, channels, anchors, strides, classes, alloc_size=(128, 128),
                  nms_thresh=0.45, nms_topk=400, post_nms=100, pos_iou_thresh=1.0,
@@ -558,10 +558,10 @@ def get_yolov3(name, stages, filters, anchors, strides, classes,
         Model weights storing path.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     HybridBlock
@@ -637,10 +637,10 @@ def yolo3_darknet53_voc(pretrained_base=True, pretrained=False,
         String value represents the hashtag for a certain version of pretrained weights.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -670,10 +670,10 @@ def yolo3_darknet53_coco(pretrained_base=True, pretrained=False,
         String value represents the hashtag for a certain version of pretrained weights.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -705,10 +705,10 @@ def yolo3_darknet53_custom(classes, transfer=None, pretrained_base=True, pretrai
         Whether fetch and load pretrained weights for base network.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -748,10 +748,10 @@ def yolo3_mobilenet1_0_voc(pretrained_base=True, pretrained=False,
         String value represents the hashtag for a certain version of pretrained weights.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -792,10 +792,10 @@ def yolo3_mobilenet1_0_custom(classes, transfer=None, pretrained_base=True, pret
         Whether fetch and load pretrained weights for base network.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -843,10 +843,10 @@ def yolo3_mobilenet1_0_coco(pretrained_base=True, pretrained=False, norm_layer=B
         String value represents the hashtag for a certain version of pretrained weights.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -886,10 +886,10 @@ def yolo3_mobilenet0_25_voc(pretrained_base=True, pretrained=False,
         String value represents the hashtag for a certain version of pretrained weights.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -930,10 +930,10 @@ def yolo3_mobilenet0_25_custom(classes, transfer=None, pretrained_base=True, pre
         Whether fetch and load pretrained weights for base network.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock
@@ -981,10 +981,10 @@ def yolo3_mobilenet0_25_coco(pretrained_base=True, pretrained=False, norm_layer=
         String value represents the hashtag for a certain version of pretrained weights.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     Returns
     -------
     mxnet.gluon.HybridBlock

@@ -34,10 +34,10 @@ class NonLocal(HybridBlock):
         Whether to use batch normalization layer inside a non-local block.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     ctx : Context, default CPU.
         The context in which to load the pretrained weights.
     """

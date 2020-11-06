@@ -646,7 +646,7 @@ if __name__ == '__main__':
         args.use_fpn = True
         net_name = '_'.join(('mask_rcnn_fpn', args.network, args.dataset))
         if args.norm_layer == 'bn':
-            norm_layer = gluon.contrib.nn.SyncBatchNorm
+            norm_layer = gluon.nn.SyncBatchNorm
             norm_kwargs = {'num_devices': len(ctx)}
             sym_norm_layer = mx.sym.contrib.SyncBatchNorm
             sym_norm_kwargs = {'ndev': len(ctx)}

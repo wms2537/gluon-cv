@@ -38,12 +38,12 @@ class ResNetV1bSSD(HybridBlock):
         Number of channels for the appended layers, ignored if `network`is `None`.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
         This will only apply to base networks that has `norm_layer` specified, will ignore if the
         base network (e.g. VGG) don't accept this argument.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     use_bn : bool
         Whether to use BatchNorm layer after each attached convolutional layer.
     reduce_ratio : float

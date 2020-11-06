@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import mxnet as mx
 from mxnet.gluon import nn
-from mxnet.gluon.contrib.nn import SyncBatchNorm
+from mxnet.gluon.nn import SyncBatchNorm
 
 from ..mask_rcnn import get_mask_rcnn
 from ....nn.feature import FPNFeatureExpander

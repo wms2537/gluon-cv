@@ -584,7 +584,7 @@ def test_mobilenet_sync_bn():
     net = gcv.model_zoo.get_model(model_name, pretrained=True)
     net.save_parameters(model_name + '.params')
     net = gcv.model_zoo.get_model(model_name, pretrained=False,
-                                  norm_layer=mx.gluon.contrib.nn.SyncBatchNorm,
+                                  norm_layer=mx.gluon.nn.SyncBatchNorm,
                                   norm_kwargs={'num_devices': 2})
     net.load_parameters(model_name + '.params')
 

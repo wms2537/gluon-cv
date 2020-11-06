@@ -7,7 +7,7 @@ import warnings
 import mxnet as mx
 from mxnet import autograd
 from mxnet.gluon import nn
-from mxnet.gluon.contrib.nn import SyncBatchNorm
+from mxnet.gluon.nn import SyncBatchNorm
 
 from .rcnn_target import MaskTargetGenerator
 from ..faster_rcnn import FasterRCNN

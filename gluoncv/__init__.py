@@ -12,7 +12,7 @@ _deprecate_python2()
 
 # optionally depend on mxnet or pytorch
 try:
-    _require_mxnet_version('1.4.0', '2.0.0')
+    _require_mxnet_version('1.4.0', '2.0.1')
     from . import data
     from . import model_zoo
     from . import nn

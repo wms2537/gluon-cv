@@ -23,14 +23,14 @@ __all__ = ['SqueezeNet', 'squeezenet1_0', 'squeezenet1_1']
 from mxnet.context import cpu
 from mxnet.gluon.block import HybridBlock
 from mxnet.gluon import nn
-from mxnet.gluon.contrib.nn import HybridConcurrent
+from mxnet.gluon.nn import HybridConcatenate
 
 # Helpers
 def _make_fire(squeeze_channels, expand1x1_channels, expand3x3_channels):
     out = nn.HybridSequential(prefix='')
     out.add(_make_fire_conv(squeeze_channels, 1))
 
-    paths = HybridConcurrent(axis=1, prefix='')
+    paths = HybridConcatenate(axis=1, prefix='')
     paths.add(_make_fire_conv(expand1x1_channels, 1))
     paths.add(_make_fire_conv(expand3x3_channels, 3, 1))
     out.add(paths)

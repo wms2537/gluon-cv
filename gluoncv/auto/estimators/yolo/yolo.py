@@ -298,7 +298,7 @@ class YOLOv3Estimator(BaseEstimator):
                                          classes=self.classes,
                                          dataset=self._cfg.dataset,
                                          pretrained_base=True,
-                                         norm_layer=gluon.contrib.nn.SyncBatchNorm,
+                                         norm_layer=gluon.nn.SyncBatchNorm,
                                          norm_kwargs={'num_devices': len(self.ctx)})
                 self.async_net = custom_yolov3(base_network_name=self._cfg.yolo3.backbone,
                                                filters=self._cfg.yolo3.filters,
@@ -323,7 +323,7 @@ class YOLOv3Estimator(BaseEstimator):
             # use sync bn if specified
             if self._cfg.yolo3.syncbn and len(self.ctx) > 1:
                 self.net = get_model(self._cfg.yolo3.transfer, pretrained=True,
-                                     norm_layer=gluon.contrib.nn.SyncBatchNorm,
+                                     norm_layer=gluon.nn.SyncBatchNorm,
                                      norm_kwargs={'num_devices': len(self.ctx)})
                 self.async_net = get_model(self._cfg.yolo3.transfer, pretrained=True)  # used by cpu worker
             else:

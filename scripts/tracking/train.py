@@ -96,7 +96,7 @@ def parse_args():
         os.makedirs(opt.save_dir)
 
     # Synchronized BatchNorm
-    opt.norm_layer = mx.gluon.contrib.nn.SyncBatchNorm if opt.syncbn \
+    opt.norm_layer = mx.gluon.nn.SyncBatchNorm if opt.syncbn \
         else mx.gluon.nn.BatchNorm
     opt.norm_kwargs = {'num_devices': opt.ngpus} if opt.syncbn else {}
     return opt

@@ -122,7 +122,7 @@ def parse_args():
     makedirs(args.save_dir)
 
     # Synchronized BatchNorm
-    args.norm_layer = mx.gluon.contrib.nn.SyncBatchNorm if args.syncbn \
+    args.norm_layer = mx.gluon.nn.SyncBatchNorm if args.syncbn \
         else mx.gluon.nn.BatchNorm
     args.norm_kwargs = {'num_devices': args.ngpus} if args.syncbn else {}
     return args

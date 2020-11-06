@@ -122,7 +122,7 @@ class ResNetV1b(HybridBlock):
         typically used in Semantic Segmentation.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     deep_stem : bool, default False
@@ -281,7 +281,7 @@ def resnet18_v1b(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     use_global_stats : bool, default False
@@ -317,7 +317,7 @@ def resnet34_v1b(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     use_global_stats : bool, default False
@@ -353,7 +353,7 @@ def resnet50_v1b(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     use_global_stats : bool, default False
@@ -422,7 +422,7 @@ def resnet101_v1b(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     use_global_stats : bool, default False
@@ -491,7 +491,7 @@ def resnet152_v1b(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     use_global_stats : bool, default False
@@ -526,7 +526,7 @@ def resnet50_v1c(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], deep_stem=True,
                       name_prefix='resnetv1c_', **kwargs)
@@ -558,7 +558,7 @@ def resnet101_v1c(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 23, 3], deep_stem=True,
                       name_prefix='resnetv1c_', **kwargs)
@@ -589,7 +589,7 @@ def resnet152_v1c(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 8, 36, 3], deep_stem=True,
                       name_prefix='resnetv1c_', **kwargs)
@@ -620,7 +620,7 @@ def resnet50_v1d(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], deep_stem=True, avg_down=True,
                       name_prefix='resnetv1d_', **kwargs)
@@ -651,7 +651,7 @@ def resnet101_v1d(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 23, 3], deep_stem=True, avg_down=True,
                       name_prefix='resnetv1d_', **kwargs)
@@ -682,7 +682,7 @@ def resnet152_v1d(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 8, 36, 3], deep_stem=True, avg_down=True,
                       name_prefix='resnetv1d_', **kwargs)
@@ -713,7 +713,7 @@ def resnet50_v1e(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3],
                       deep_stem=True, avg_down=True, stem_width=64,
@@ -745,7 +745,7 @@ def resnet101_v1e(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 23, 3],
                       deep_stem=True, avg_down=True, stem_width=64,
@@ -777,7 +777,7 @@ def resnet152_v1e(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 8, 36, 3],
                       deep_stem=True, avg_down=True, stem_width=64,
@@ -810,7 +810,7 @@ def resnet50_v1s(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs)
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], deep_stem=True, stem_width=64,
                       name_prefix='resnetv1s_', **kwargs)
@@ -842,7 +842,7 @@ def resnet101_v1s(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 4, 23, 3], deep_stem=True, stem_width=64,
                       name_prefix='resnetv1s_', **kwargs)
@@ -874,7 +874,7 @@ def resnet152_v1s(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs
         Whether to apply dilation strategy to ResNetV1b, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNetV1b(BottleneckV1b, [3, 8, 36, 3], deep_stem=True, stem_width=64,
                       name_prefix='resnetv1s_', **kwargs)

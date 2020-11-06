@@ -310,7 +310,7 @@ def alpha_pose_resnet101_v1b_coco(**kwargs):
     keypoints = COCOKeyPoints.KEYPOINTS
     num_gpus = kwargs.pop('num_gpus', None)
     if num_gpus is not None and int(num_gpus) > 1:
-        norm_layer = mx.gluon.contrib.nn.SyncBatchNorm
+        norm_layer = mx.gluon.nn.SyncBatchNorm
         norm_kwargs = {'use_global_stats': False, 'num_devices': int(num_gpus)}
     else:
         norm_layer = mx.gluon.nn.BatchNorm

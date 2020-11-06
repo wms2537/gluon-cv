@@ -8,7 +8,7 @@ from mxnet.context import cpu
 from mxnet.gluon.block import HybridBlock
 from mxnet.gluon import nn
 from mxnet.gluon.nn import BatchNorm
-from mxnet.gluon.contrib.nn import HybridConcurrent
+from mxnet.gluon.nn import HybridConcatenate
 from gluoncv.model_zoo.inception import inception_v3
 
 def _make_basic_conv(in_channels, channels, norm_layer=BatchNorm, norm_kwargs=None, **kwargs):
@@ -39,7 +39,7 @@ def _make_branch(use_pool, norm_layer, norm_kwargs, *conv_settings):
     return out
 
 def _make_A(in_channels, pool_features, prefix, norm_layer, norm_kwargs):
-    out = HybridConcurrent(axis=1, prefix=prefix)
+    out = HybridConcatenate(axis=1, prefix=prefix)
     with out.name_scope():
         out.add(_make_branch(None, norm_layer, norm_kwargs,
                              (in_channels, 64, 1, None, None)))
@@ -55,7 +55,7 @@ def _make_A(in_channels, pool_features, prefix, norm_layer, norm_kwargs):
     return out
 
 def _make_B(prefix, norm_layer, norm_kwargs):
-    out = HybridConcurrent(axis=1, prefix=prefix)
+    out = HybridConcatenate(axis=1, prefix=prefix)
     with out.name_scope():
         out.add(_make_branch(None, norm_layer, norm_kwargs,
                              (288, 384, 3, 2, (1, 0, 0))))
@@ -67,7 +67,7 @@ def _make_B(prefix, norm_layer, norm_kwargs):
     return out
 
 def _make_C(in_channels, channels_7x7, prefix, norm_layer, norm_kwargs):
-    out = HybridConcurrent(axis=1, prefix=prefix)
+    out = HybridConcatenate(axis=1, prefix=prefix)
     with out.name_scope():
         out.add(_make_branch(None, norm_layer, norm_kwargs,
                              (in_channels, 192, 1, None, None)))
@@ -86,7 +86,7 @@ def _make_C(in_channels, channels_7x7, prefix, norm_layer, norm_kwargs):
     return out
 
 def _make_D(prefix, norm_layer, norm_kwargs):
-    out = HybridConcurrent(axis=1, prefix=prefix)
+    out = HybridConcatenate(axis=1, prefix=prefix)
     with out.name_scope():
         out.add(_make_branch(None, norm_layer, norm_kwargs,
                              (768, 192, 1, None, None),
@@ -100,7 +100,7 @@ def _make_D(prefix, norm_layer, norm_kwargs):
     return out
 
 def _make_E(in_channels, prefix, norm_layer, norm_kwargs):
-    out = HybridConcurrent(axis=1, prefix=prefix)
+    out = HybridConcatenate(axis=1, prefix=prefix)
     with out.name_scope():
         out.add(_make_branch(None, norm_layer, norm_kwargs,
                              (in_channels, 320, 1, None, None)))
@@ -109,7 +109,7 @@ def _make_E(in_channels, prefix, norm_layer, norm_kwargs):
         out.add(branch_3x3)
         branch_3x3.add(_make_branch(None, norm_layer, norm_kwargs,
                                     (in_channels, 384, 1, None, None)))
-        branch_3x3_split = HybridConcurrent(axis=1, prefix='')
+        branch_3x3_split = HybridConcatenate(axis=1, prefix='')
         branch_3x3_split.add(_make_branch(None, norm_layer, norm_kwargs,
                                           (384, 384, (3, 1, 3), None, (1, 0, 1))))
         branch_3x3_split.add(_make_branch(None, norm_layer, norm_kwargs,
@@ -121,7 +121,7 @@ def _make_E(in_channels, prefix, norm_layer, norm_kwargs):
         branch_3x3dbl.add(_make_branch(None, norm_layer, norm_kwargs,
                                        (in_channels, 448, 1, None, None),
                                        (448, 384, 3, None, 1)))
-        branch_3x3dbl_split = HybridConcurrent(axis=1, prefix='')
+        branch_3x3dbl_split = HybridConcatenate(axis=1, prefix='')
         branch_3x3dbl.add(branch_3x3dbl_split)
         branch_3x3dbl_split.add(_make_branch(None, norm_layer, norm_kwargs,
                                              (384, 384, (3, 1, 3), None, (1, 0, 1))))
@@ -171,10 +171,10 @@ class I3D_InceptionV3(HybridBlock):
         Freeze all batch normalization layers during training except the first layer.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     def __init__(self, nclass=1000, pretrained=False, pretrained_base=True,
                  num_segments=1, num_crop=1, feat_ext=False,

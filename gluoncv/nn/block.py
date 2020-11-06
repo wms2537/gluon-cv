@@ -156,7 +156,7 @@ class DUC(HybridBlock):
         self.bn = BatchNormCudnnOff(gamma_initializer=initializer.One(),
                                     beta_initializer=initializer.Zero())
         self.relu = nn.Activation('relu')
-        self.pixel_shuffle = contrib.nn.PixelShuffle2D(upscale_factor)
+        self.pixel_shuffle = nn.PixelShuffle2D(upscale_factor)
 
     def hybrid_forward(self, F, x):
         x = self.conv(x)

@@ -68,7 +68,7 @@ import gluoncv
 #             b4 = _AsppPooling(in_channels, out_channels, norm_layer=norm_layer,
 #                               norm_kwargs=norm_kwargs)
 #
-#             self.concurent = gluon.contrib.nn.HybridConcurrent(axis=1)
+#             self.concurent = gluon.nn.HybridConcatenate(axis=1)
 #             with self.concurent.name_scope():
 #                 self.concurent.add(b0)
 #                 self.concurent.add(b1)

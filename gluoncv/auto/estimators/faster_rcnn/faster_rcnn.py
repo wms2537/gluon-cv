@@ -336,7 +336,7 @@ class FasterRCNNEstimator(BaseEstimator):
         else:
             self._cfg.faster_rcnn.use_fpn = True
             if self._cfg.faster_rcnn.norm_layer == 'syncbn':
-                norm_layer = gluon.contrib.nn.SyncBatchNorm
+                norm_layer = gluon.nn.SyncBatchNorm
                 norm_kwargs = {'num_devices': len(self.ctx)}
                 sym_norm_layer = mx.sym.contrib.SyncBatchNorm
                 sym_norm_kwargs = {'ndev': len(self.ctx)}

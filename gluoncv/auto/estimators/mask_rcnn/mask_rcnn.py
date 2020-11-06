@@ -93,7 +93,7 @@ class MaskRCNNEstimator(BaseEstimator):
             self._cfg.mask_rcnn.use_fpn = True
             net_name = '_'.join(('mask_rcnn_fpn', self._cfg.mask_rcnn.backbone, self._cfg.dataset))
             if self._cfg.mask_rcnn.norm_layer == 'bn':
-                norm_layer = gluon.contrib.nn.SyncBatchNorm
+                norm_layer = gluon.nn.SyncBatchNorm
                 norm_kwargs = {'num_devices': len(self.ctx)}
                 # sym_norm_layer = mx.sym.contrib.SyncBatchNorm
                 sym_norm_kwargs = {'ndev': len(self.ctx)}

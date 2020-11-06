@@ -95,7 +95,7 @@ def parse_args():
     args.ctx = [mx.cpu(0)]
     args.ctx = [mx.gpu(i) for i in range(args.ngpus)] if args.ngpus > 0 else args.ctx
 
-    args.norm_layer = mx.gluon.contrib.nn.SyncBatchNorm if args.syncbn \
+    args.norm_layer = mx.gluon.nn.SyncBatchNorm if args.syncbn \
         else mx.gluon.nn.BatchNorm
     args.norm_kwargs = {'num_devices': args.ngpus} if args.syncbn else {}
     return args

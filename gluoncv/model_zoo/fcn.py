@@ -23,7 +23,7 @@ class FCN(SegBaseModel):
         Normalization layer used in backbone network (default: :class:`mxnet.gluon.nn.BatchNorm`;
     norm_kwargs : dict
         Additional `norm_layer` arguments, for example `num_devices=4`
-        for :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        for :class:`mxnet.gluon.nn.SyncBatchNorm`.
     pretrained_base : bool or str
         Refers to if the FCN backbone or the encoder is pretrained or not. If `True`,
         model weights of a model that was trained on ImageNet is loaded.

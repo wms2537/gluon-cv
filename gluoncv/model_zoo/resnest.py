@@ -144,7 +144,7 @@ class ResNeSt(HybridBlock):
         typically used in Semantic Segmentation.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`)
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     last_gamma : bool, default False
         Whether to initialize the gamma of the last BatchNorm layer in each bottleneck to zero.
     deep_stem : bool, default False
@@ -361,7 +361,7 @@ def resnest14(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs):
         Whether to apply dilation strategy to ResNeSt, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNeSt(Bottleneck, [1, 1, 1, 1],
                     radix=2, cardinality=1, bottleneck_width=64,
@@ -396,7 +396,7 @@ def resnest26(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs):
         Whether to apply dilation strategy to ResNeSt, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNeSt(Bottleneck, [2, 2, 2, 2],
                     radix=2, cardinality=1, bottleneck_width=64,
@@ -431,7 +431,7 @@ def resnest50(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs):
         Whether to apply dilation strategy to ResNeSt, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNeSt(Bottleneck, [3, 4, 6, 3],
                     radix=2, cardinality=1, bottleneck_width=64,
@@ -466,7 +466,7 @@ def resnest101(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs):
         Whether to apply dilation strategy to ResNeSt, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNeSt(Bottleneck, [3, 4, 23, 3],
                     radix=2, cardinality=1, bottleneck_width=64,
@@ -500,7 +500,7 @@ def resnest200(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs):
         Whether to apply dilation strategy to ResNeSt, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNeSt(Bottleneck, [3, 24, 36, 3], deep_stem=True, avg_down=True, stem_width=64,
                     avd=True, use_splat=True, dropblock_prob=0.1, final_drop=0.2,
@@ -532,7 +532,7 @@ def resnest269(pretrained=False, root='~/.mxnet/models', ctx=cpu(0), **kwargs):
         Whether to apply dilation strategy to ResNeSt, yielding a stride 8 model.
     norm_layer : object
         Normalization layer used (default: :class:`mxnet.gluon.nn.BatchNorm`).
-        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.contrib.nn.SyncBatchNorm`.
+        Can be :class:`mxnet.gluon.nn.BatchNorm` or :class:`mxnet.gluon.nn.SyncBatchNorm`.
     """
     model = ResNeSt(Bottleneck, [3, 30, 48, 8], deep_stem=True, avg_down=True, stem_width=64,
                     avd=True, use_splat=True, dropblock_prob=0.1, final_drop=0.2,

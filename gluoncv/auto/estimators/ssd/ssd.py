@@ -294,7 +294,7 @@ class SSDEstimator(BaseEstimator):
             self._logger.info(
                 f'Using transfer learning from {self._cfg.ssd.transfer}, the other network parameters are ignored.')
             if self._cfg.ssd.syncbn and len(self.ctx) > 1:
-                self.net = get_model(self._cfg.ssd.transfer, pretrained=True, norm_layer=gluon.contrib.nn.SyncBatchNorm,
+                self.net = get_model(self._cfg.ssd.transfer, pretrained=True, norm_layer=gluon.nn.SyncBatchNorm,
                                      norm_kwargs={'num_devices': len(self.ctx)})
                 self.async_net = get_model(self._cfg.ssd.transfer, pretrained=True)  # used by cpu worker
                 self.net.reset_class(self.classes,
@@ -316,7 +316,7 @@ class SSDEstimator(BaseEstimator):
                                       classes=self.classes,
                                       dataset='auto',
                                       pretrained_base=True,
-                                      norm_layer=gluon.contrib.nn.SyncBatchNorm,
+                                      norm_layer=gluon.nn.SyncBatchNorm,
                                       norm_kwargs={'num_devices': len(self.ctx)})
                 self.async_net = custom_ssd(base_network_name=self._cfg.ssd.backbone,
                                             base_size=self._cfg.ssd.data_shape,
