@@ -2,9 +2,9 @@
 # pylint: disable=bad-whitespace,missing-class-docstring
 import logging
 import copy
-import uuid
 import time
 import pprint
+import pickle
 from typing import Union, Tuple
 
 from autocfg import dataclass
@@ -25,30 +25,30 @@ from .dataset import ImageClassificationDataset
 __all__ = ['ImageClassification']
 
 @dataclass
-class LightConfig:
-    model : Union[str, ag.Space] = ag.Categorical('resnet18_v1b', 'mobilenetv3_small')
+class LiteConfig:
+    model : Union[str, ag.Space, type(None)] = ag.Categorical('resnet18_v1b', 'mobilenetv3_small')
     lr : Union[ag.Space, float] = 1e-2
     num_trials : int = 1
-    epochs : int = 5
-    batch_size : int = 8
+    epochs : Union[ag.Space, int] = 5
+    batch_size : Union[ag.Space, int] = 8
     nthreads_per_trial : int = 32
     ngpus_per_trial : int = 0
     time_limits : int = 3600
-    search_strategy : str = 'random'
-    dist_ip_addrs : Union[None, list, Tuple] = None
+    search_strategy : Union[str, ag.Space] = 'random'
+    dist_ip_addrs : Union[type(None), list, Tuple] = None
 
 @dataclass
 class DefaultConfig:
     model : Union[ag.Space, str] = ag.Categorical('resnet50_v1b', 'resnest50')
     lr : Union[ag.Space, float] = ag.Categorical(1e-2, 5e-2)
     num_trials : int = 3
-    epochs : int = 15
-    batch_size : int = 16
+    epochs : Union[ag.Space, int] = 15
+    batch_size : Union[ag.Space, int] = 16
     nthreads_per_trial : int = 128
     ngpus_per_trial : int = 8
     time_limits : int = 3600
-    search_strategy : str = 'random'
-    dist_ip_addrs : Union[None, list, Tuple] = None
+    search_strategy : Union[str, ag.Space] = 'random'
+    dist_ip_addrs : Union[type(None), list, Tuple] = None
 
 @ag.args()
 def _train_image_classification(args, reporter):
@@ -66,7 +66,11 @@ def _train_image_classification(args, reporter):
     tic = time.time()
     try:
         estimator_cls = args.pop('estimator', None)
-        estimator = estimator_cls(args, reporter=reporter)
+        assert estimator_cls == ImageClassificationEstimator
+        custom_net = args.pop('custom_net', None)
+        custom_optimizer = args.pop('custom_optimizer', None)
+        estimator = estimator_cls(args, reporter=reporter,
+                                  net=custom_net, optimizer=custom_optimizer)
         # training
         result = estimator.fit(train_data=train_data, val_data=val_data)
     # pylint: disable=bare-except
@@ -76,9 +80,9 @@ def _train_image_classification(args, reporter):
                 'time': time.time() - tic, 'train_acc': -1, 'valid_acc': -1}
 
     # TODO: checkpointing needs to be done in a better way
-    unique_checkpoint = 'train_image_classification_' + str(uuid.uuid4()) + '.pkl'
-    estimator.save(unique_checkpoint)
-    result.update({'model_checkpoint': unique_checkpoint})
+    # unique_checkpoint = 'train_image_classification_' + str(uuid.uuid4()) + '.pkl'
+    # estimator.save(unique_checkpoint)
+    result.update({'model_checkpoint': pickle.dumps(estimator)})
     return result
 
 
@@ -91,7 +95,9 @@ class ImageClassification(BaseTask):
         The configurations, can be nested dict.
     logger : logging.Logger
         The desired logger object, use `None` for module specific logger with default setting.
-
+    net : mx.gluon.Block
+        The custom network. If defined, the model name in config will be ignored so your
+        custom network will be used for training rather than pulling it from model zoo.
     """
     Dataset = ImageClassificationDataset
 
@@ -110,7 +116,7 @@ class ImageClassification(BaseTask):
         if not config:
             if gpu_count < 1:
                 self._logger.info('No GPU detected/allowed, using most conservative search space.')
-                config = LightConfig()
+                config = LiteConfig()
             else:
                 config = DefaultConfig()
             config = config.asdict()
@@ -119,7 +125,7 @@ class ImageClassification(BaseTask):
                 ngpus_per_trial = config.get('ngpus_per_trial', gpu_count)
                 if ngpus_per_trial < 1:
                     self._logger.info('No GPU detected/allowed, using most conservative search space.')
-                    default_config = LightConfig()
+                    default_config = LiteConfig()
                 else:
                     default_config = DefaultConfig()
                 config = default_config.merge(config, allow_new_key=True).asdict()
@@ -256,10 +262,9 @@ class ImageClassification(BaseTask):
         model_checkpoint = results.get('model_checkpoint', None)
         if model_checkpoint is None:
             raise RuntimeError(f'Unexpected error happened during fit: {pprint.pformat(results, indent=2)}')
-        estimator = self.load(results['model_checkpoint'])
+        estimator = pickle.loads(results['model_checkpoint'])
         return estimator
 
-    @property
     def fit_summary(self):
         return copy.copy(self._fit_summary)
 

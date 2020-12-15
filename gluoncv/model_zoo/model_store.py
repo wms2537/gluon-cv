@@ -125,7 +125,7 @@ _model_sha1 = {name: checksum for checksum, name in [
     ('d0e8603120ab02118a8973d52a26b8296d1b4078', 'psp_resnet101_citys'),
     ('ef2bb40ad8f8f59f451969b2fabe4e548394e80a', 'deeplab_v3b_plus_wideresnet_citys'),
     ('909742b45d5a3844d6000248aa92fef0ae23a0f0', 'icnet_resnet50_citys'),
-    ('63db8a7938586525256a0bdc6632ed986e4026cf', 'icnet_resnet50_mhpv1'),
+    ('873d381a4bc246c5b9d3660ccf66c2f63d0b4e7c', 'icnet_resnet50_mhpv1'),
     ('cf6a7bb3d55360933de647a8505f7936003902a4', 'deeplab_resnet50_citys'),
     ('eb8477a91efc244c85b364c0736664078aaf0e65', 'deeplab_resnet101_citys'),
     ('95aad0b699ae17c67caa44b3ead4b23474e98954', 'fastscnn_citys'),
@@ -228,6 +228,7 @@ _model_sha1 = {name: checksum for checksum, name in [
     ('9515c219cf72575636e2168728ebb9f12fe8e4df', 'monodepth2_resnet18_kitti_mono_stereo_640x192'),
     ('661ee2e1bf824f4f4549b3488c59dec0b0078c38', 'monodepth2_resnet18_posenet_kitti_mono_640x192'),
     ('c14979bb016ed4f555fa09004ddc7616dd60b8b9', 'monodepth2_resnet18_posenet_kitti_mono_stereo_640x192'),
+    ('299b1d9d8a2bcf7c122acd0d23606af4fdfbe7e1', 'i3d_slow_resnet101_f16s4_kinetics700'),
 ]}
 
 apache_repo_url = 'https://apache-mxnet.s3-accelerate.dualstack.amazonaws.com/'

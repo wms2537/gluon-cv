@@ -83,6 +83,19 @@ def auto_suggest(config, estimator, logger):
     """
     if estimator is None:
         estimator = [SSDEstimator, FasterRCNNEstimator, YOLOv3Estimator, CenterNetEstimator]
+    elif isinstance(estimator, str):
+        named_estimators = {
+            'ssd': SSDEstimator,
+            'faster_rcnn': FasterRCNNEstimator,
+            'yolo3': YOLOv3Estimator,
+            'center_net': CenterNetEstimator,
+            'img_cls': ImageClassificationEstimator
+        }
+        if estimator.lower() in named_estimators:
+            estimator = [named_estimators[estimator.lower()]]
+        else:
+            available_ests = named_estimators.keys()
+            raise ValueError(f'Unknown estimator name: {estimator}, options: {available_ests}')
     elif isinstance(estimator, (tuple, list)):
         pass
     else:
@@ -212,6 +225,21 @@ def config_to_nested(config):
             estimator = CenterNetEstimator
         else:
             estimator = ImageClassificationEstimator
+    else:
+        # str to instance
+        if isinstance(estimator, str):
+            if estimator == 'ssd':
+                estimator = SSDEstimator
+            elif estimator == 'faster_rcnn':
+                estimator = FasterRCNNEstimator
+            elif estimator == 'yolo3':
+                estimator = YOLOv3Estimator
+            elif estimator == 'center_net':
+                estimator = CenterNetEstimator
+            elif estimator == 'img_cls':
+                estimator = ImageClassificationEstimator
+            else:
+                raise ValueError(f'Unknown estimator: {estimator}')
 
     cfg_map = estimator._default_cfg.asdict()
 

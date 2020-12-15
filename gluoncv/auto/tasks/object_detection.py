@@ -3,7 +3,7 @@
 import time
 import copy
 import logging
-import uuid
+import pickle
 import pprint
 from typing import Union, Tuple
 
@@ -24,28 +24,28 @@ from .dataset import ObjectDetectionDataset
 __all__ = ['ObjectDetection']
 
 @dataclass
-class LightConfig:
-    transfer : Union[str, ag.Space] = ag.Categorical('ssd_512_mobilenet1.0_coco', 'yolo3_mobilenet1.0_coco')
+class LiteConfig:
+    transfer : Union[str, ag.Space, type(None)] = ag.Categorical('ssd_512_mobilenet1.0_coco', 'yolo3_mobilenet1.0_coco')
     lr : Union[ag.Space, float] = 1e-3
     num_trials : int = 1
-    epochs : int = 5
+    epochs : Union[ag.Space, int] = 5
     nthreads_per_trial : int = 32
     ngpus_per_trial : int = 0
     time_limits : int = 3600
-    search_strategy : str = 'random'
-    dist_ip_addrs : Union[None, list, Tuple] = None
+    search_strategy : Union[str, ag.Space] = 'random'
+    dist_ip_addrs : Union[type(None), list, Tuple] = None
 
 @dataclass
 class DefaultConfig:
-    transfer : Union[ag.Space, str] = ag.Categorical('yolo3_darknet53_coco', 'ssd_512_resnet50_v1_voc')
+    transfer : Union[ag.Space, str, type(None)] = ag.Categorical('yolo3_darknet53_coco', 'ssd_512_resnet50_v1_voc')
     lr : Union[ag.Space, float] = ag.Categorical(1e-3, 5e-3)
     num_trials : int = 3
-    epochs : int = 10
+    epochs : Union[ag.Space, int] = 10
     nthreads_per_trial : int = 128
     ngpus_per_trial : int = 8
     time_limits : int = 3600
-    search_strategy : str = 'random'
-    dist_ip_addrs : Union[None, list, Tuple] = None
+    search_strategy : Union[str, ag.Space] = 'random'
+    dist_ip_addrs : Union[type(None), list, Tuple] = None
 
 
 @ag.args()
@@ -74,9 +74,9 @@ def _train_object_detection(args, reporter):
                 'time': time.time() - tic, 'train_map': -1, 'valid_map': -1}
 
     # TODO: checkpointing needs to be done in a better way
-    unique_checkpoint = 'train_object_detection_' + str(uuid.uuid4()) + '.pkl'
-    estimator.save(unique_checkpoint)
-    result.update({'model_checkpoint': unique_checkpoint})
+    # unique_checkpoint = 'train_object_detection_' + str(uuid.uuid4()) + '.pkl'
+    # estimator.save(unique_checkpoint)
+    result.update({'model_checkpoint': pickle.dumps(estimator)})
     return result
 
 class ObjectDetection(BaseTask):
@@ -106,7 +106,7 @@ class ObjectDetection(BaseTask):
         if not config:
             if gpu_count < 1:
                 self._logger.info('No GPU detected/allowed, using most conservative search space.')
-                config = LightConfig()
+                config = LiteConfig()
             else:
                 config = DefaultConfig()
             config = config.asdict()
@@ -115,7 +115,7 @@ class ObjectDetection(BaseTask):
                 ngpus_per_trial = config.get('ngpus_per_trial', gpu_count)
                 if ngpus_per_trial < 1:
                     self._logger.info('No GPU detected/allowed, using most conservative search space.')
-                    default_config = LightConfig()
+                    default_config = LiteConfig()
                 else:
                     default_config = DefaultConfig()
                 config = default_config.merge(config, allow_new_key=True).asdict()
@@ -134,6 +134,22 @@ class ObjectDetection(BaseTask):
         else:
             raise ValueError('Please specify `nthreads_per_trial` and `ngpus_per_trial` '
                              'given that dist workers are available')
+
+        # fix estimator-transfer relationship
+        estimator = config.get('estimator', None)
+        transfer = config.get('transfer', None)
+        if estimator is not None and transfer is not None:
+            if isinstance(transfer, ag.Space):
+                transfer = transfer.data
+            if isinstance(transfer, str):
+                transfer = [transfer]
+            transfer = [t for t in transfer if estimator in t]
+            if not transfer:
+                raise ValueError(f'No matching `transfer` model for {estimator}')
+            if len(transfer) == 1:
+                config['transfer'] = transfer[0]
+            else:
+                config['transfer'] = ag.Categorical(**transfer)
 
         # additional configs
         config['num_workers'] = nthreads_per_trial
@@ -256,10 +272,9 @@ class ObjectDetection(BaseTask):
         model_checkpoint = results.get('model_checkpoint', None)
         if model_checkpoint is None:
             raise RuntimeError(f'Unexpected error happened during fit: {pprint.pformat(results, indent=2)}')
-        estimator = self.load(results['model_checkpoint'])
+        estimator = pickle.loads(results['model_checkpoint'])
         return estimator
 
-    @property
     def fit_summary(self):
         return copy.copy(self._fit_summary)
 
