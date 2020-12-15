@@ -29,9 +29,23 @@ The following table lists our trained models on Kinetics400.
 
   ``Segment`` is the number of segments used during training. For testing (reporting these numbers), we use 250 views for 2D networks (25 frames and 10-crop) and 30 views for 3D networks (10 clips and 3-crop) following the convention.
 
+  The model weights of ``r2plus1d_v2_resnet152_kinetics400``, ``ircsn_v2_resnet152_f32s2_kinetics400`` and ``TPN family`` are ported from VMZ and TPN repository. You may ignore the training config of these models for now.
+
 
 .. csv-table::
    :file: ./csv_tables/Action_Recognitions/Kinetics400_torch.csv
+   :header-rows: 1
+   :class: tight-table
+   :widths: 36 12 10 10 8 12 12
+
+
+Kinetics700 Dataset
+-------------------
+
+The following table lists our trained models on Kinetics700.
+
+.. csv-table::
+   :file: ./csv_tables/Action_Recognitions/Kinetics700_torch.csv
    :header-rows: 1
    :class: tight-table
    :widths: 36 12 10 10 8 12 12
@@ -51,4 +65,3 @@ The following table lists our trained models on Something-Something-V2.
    :header-rows: 1
    :class: tight-table
    :widths: 36 12 10 10 8 12 12
-   
